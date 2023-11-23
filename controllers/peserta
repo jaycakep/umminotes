@@ -12,6 +12,57 @@ class PesertaController {
         require 'views/peserta/index.php';
     }
 
-    // Metode lain untuk create, update, dan delete
+    public function create() {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $filteredPost = filter_input_array(INPUT_POST, [
+                'nama' => [
+                    'filter' => FILTER_SANITIZE_STRING,
+                    'flags'  => FILTER_FLAG_STRIP_LOW | FILTER_FLAG_STRIP_HIGH,
+                ],
+                'usia' => FILTER_SANITIZE_NUMBER_INT,
+            ]);
+            
+            $nama = $filteredPost['nama'] ?? '';
+            $usia = $filteredPost['usia'] ?? '';
+            $this->model->createPeserta($nama, $usia);
+            header("Location: index.php"); // Redirect after creating
+        } else {
+            // Display the form to create a new peserta
+            require 'views/peserta/create.php';
+        }
+    }
+
+    public function update($id) {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $filteredPost = filter_input_array(INPUT_POST, [
+                'nama' => [
+                    'filter' => FILTER_SANITIZE_STRING,
+                    'flags'  => FILTER_FLAG_STRIP_LOW | FILTER_FLAG_STRIP_HIGH,
+                ],
+                'usia' => FILTER_SANITIZE_NUMBER_INT,
+            ]);
+            
+            $nama = $filteredPost['nama'] ?? '';
+            $usia = $filteredPost['usia'] ?? '';
+            $this->model->updatePeserta($id, $nama, $usia);
+            header("Location: index.php"); // Redirect after updating
+        } else {
+            // Display the form to update the peserta
+            $peserta = $this->model->getPesertaById($id);
+            require 'views/peserta/update.php';
+        }
+    }
+
+    public function delete($id) {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $this->model->deletePeserta($id);
+            header("Location: index.php"); // Redirect after deleting
+        } else {
+            // Display confirmation form to delete the peserta
+            $peserta = $this->model->getPesertaById($id);
+            require 'views/peserta/delete.php';
+        }
+    }
 }
 ?>
+
