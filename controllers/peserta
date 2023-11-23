@@ -1,0 +1,17 @@
+<?php
+class PesertaController {
+    private $model;
+
+    public function __construct() {
+        require_once 'models/Peserta.php';
+        $this->model = new Peserta();
+    }
+
+    public function index() {
+        $peserta = $this->model->getAllPeserta();
+        require 'views/peserta/index.php';
+    }
+
+    // Metode lain untuk create, update, dan delete
+}
+?>
