@@ -1,28 +1,31 @@
 <?php
 require 'koneksi.php';
+$serveHost = isset($_SERVER['HTTP_HOST']) ? $_SERVER['HTTP_HOST'] : '';
+define('SERVER_HOST', '//'.$serveHost );
 
 $url = isset($_SERVER['REQUEST_URI']) ? $_SERVER['REQUEST_URI'] : '';
 $url = rtrim($url, '/');
 $url = explode('/', $url);
+$action = isset($url[1]) ? $url[1] : 'index';
 
 if (empty($url[1])) {
-    require 'controllers/index.php';
+    include 'controllers/index.php';
     $controller = new Index();
     $controller->index();
     exit;
 }
 
+
 $file = 'controllers/' . $url[1] . '.php';
 if (file_exists($file)) {
-    require $file;
+    include $file;
 } else {
     require '404.php';
     exit;
 }
 
-$controllerName = $url[1];
-$controller = new $controllerName;
-$controller->loadModel($controllerName);
+$controllerName = (ucfirst($url[1]).'Controller');
+$controller = new $controllerName ;
 
 // calling methods
 if (isset($url[3])) {
@@ -44,4 +47,6 @@ if (isset($url[3])) {
 } else {
     $controller->index();
 }
+
+//include_once 'action.php';
 ?>
