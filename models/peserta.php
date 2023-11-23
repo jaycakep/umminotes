@@ -3,12 +3,12 @@ class Peserta
 {
     public function getAllPeserta()
     {
-        return R::findAll('peserta', 'isdelete = ?', [false]);
+        return R::findAll('peserta', 'isdeleted = ?', [false]);
     }
 
     public function getPesertaById($id)
     {
-        return R::findOne('peserta', 'id = ? AND isdelete = ?', [$id, false]);
+        return R::findOne('peserta', 'id = ? AND isdeleted = ?', [$id, false]);
     }
 
     public function createPeserta($nama, $usia)
@@ -16,7 +16,7 @@ class Peserta
         $peserta = R::dispense('peserta');
         $peserta->nama = $nama;
         $peserta->usia = $usia;
-        $peserta->isdelete = false;
+        $peserta->isdeleted = false;
         R::store($peserta);
     }
 
@@ -31,7 +31,7 @@ class Peserta
     public function deletePeserta($id)
     {
         $peserta = R::load('peserta', $id);
-        $peserta->isdelete = true;
+        $peserta->isdeleted = true;
         R::store($peserta);
     }
 }

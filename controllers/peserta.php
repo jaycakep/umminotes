@@ -13,19 +13,14 @@ class PesertaController {
     }
 
     public function create() {
-        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            $filteredPost = filter_input_array(INPUT_POST, [
-                'nama' => [
-                    'filter' => FILTER_SANITIZE_STRING,
-                    'flags'  => FILTER_FLAG_STRIP_LOW | FILTER_FLAG_STRIP_HIGH,
-                ],
-                'usia' => FILTER_SANITIZE_NUMBER_INT,
-            ]);
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {         
             
-            $nama = $filteredPost['nama'] ?? '';
-            $usia = $filteredPost['usia'] ?? '';
+            $nama = filter_input(INPUT_POST, 'nama');
+            $usia = filter_input(INPUT_POST, 'usia');
+
             $this->model->createPeserta($nama, $usia);
-            header("Location: index.php"); // Redirect after creating
+
+            header("Location: ".SERVER_HOST."/peserta"); // Redirect after creating
         } else {
             // Display the form to create a new peserta
             require 'views/peserta/create.php';
@@ -34,18 +29,12 @@ class PesertaController {
 
     public function update($id) {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            $filteredPost = filter_input_array(INPUT_POST, [
-                'nama' => [
-                    'filter' => FILTER_SANITIZE_STRING,
-                    'flags'  => FILTER_FLAG_STRIP_LOW | FILTER_FLAG_STRIP_HIGH,
-                ],
-                'usia' => FILTER_SANITIZE_NUMBER_INT,
-            ]);
             
-            $nama = $filteredPost['nama'] ?? '';
-            $usia = $filteredPost['usia'] ?? '';
+            $nama = filter_input(INPUT_POST, 'nama');
+            $usia = filter_input(INPUT_POST, 'usia');
+
             $this->model->updatePeserta($id, $nama, $usia);
-            header("Location: index.php"); // Redirect after updating
+            header("Location: ".SERVER_HOST."/peserta"); // Redirect after updating
         } else {
             // Display the form to update the peserta
             $peserta = $this->model->getPesertaById($id);
@@ -56,7 +45,7 @@ class PesertaController {
     public function delete($id) {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $this->model->deletePeserta($id);
-            header("Location: index.php"); // Redirect after deleting
+            header("Location: ".SERVER_HOST."/peserta"); // Redirect after deleting
         } else {
             // Display confirmation form to delete the peserta
             $peserta = $this->model->getPesertaById($id);
