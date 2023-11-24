@@ -5,7 +5,7 @@ class Index {
     }
 
     function index() {
-        echo 'Ini adalah metode index!';
+        require_once 'views/view_index.php';
     }
 
     function loadModel($model) {
