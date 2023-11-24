@@ -1,4 +1,6 @@
 <?php
+// Start measuring execution time
+$startTime = microtime(true);
 require 'koneksi.php';
 $serveHost = isset($_SERVER['HTTP_HOST']) ? $_SERVER['HTTP_HOST'] : '';
 define('SERVER_HOST', '//'.$serveHost );
@@ -48,5 +50,12 @@ if (isset($url[3])) {
     $controller->index();
 }
 
-//include_once 'action.php';
+// End measuring execution time
+$endTime = microtime(true);
+
+// Calculate execution time
+$executionTime = $endTime - $startTime;
+
+// Output execution time to JavaScript console
+echo "<script>console.log('Execution time: " . number_format($executionTime, 4) . " seconds');</script>";
 ?>
