@@ -2,7 +2,6 @@
 class Index {
     private $model;
     function __construct() {
-        echo 'Ini adalah halaman index!';
     }
 
     function index() {
