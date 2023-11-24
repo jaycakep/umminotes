@@ -3,9 +3,13 @@
 
     <!-- Display confirmation message -->
     <p>Are you sure you want to delete the Hafalan with <br/>
+        Nama: <strong><?php echo $peserta   ['nama']; ?></strong>,<br>
         Tanggal: <strong><?php echo $hafalan['tanggal']; ?></strong>,<br>
         Surat: <strong><?php echo $hafalan['surat']; ?></strong>,<br>
-        Ayat: <strong><?php echo $hafalan['ayat']; ?></strong>?</p>
+        Ayat: <strong><?php echo $hafalan['ayat']; ?></strong>,<br>
+        Keterangan: <strong><?php echo $hafalan['keterangan']; ?></strong>,<br>
+        Status: <strong><?php echo $masterStatus['deskripsi']; ?></strong>,<br>
+        Catatan: <strong><?php echo $hafalan['catatan']; ?></strong>?</p>
 
 
     <!-- Form for deleting the Hafalan -->

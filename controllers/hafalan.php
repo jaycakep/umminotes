@@ -58,6 +58,10 @@ class HafalanController {
         } else {
             // Display the form to update the hafalan
             $hafalan = $this->model->getHafalanById($id);
+            $pesertaSelected = $this->peserta->getPesertaById($hafalan['idpeserta']);
+            $statusSelected = $this->masterStatus->getMasterStatusById($hafalan['stat']);
+            $daftarPeserta = $this->peserta->getAllPeserta();
+            $daftarStatus = $this->masterStatus->getAllMasterStatus();
             require 'views/hafalan/update.php';
             require_once 'views/template/footer.php'; // Include footer template
         }
@@ -70,6 +74,8 @@ class HafalanController {
         } else {
             // Display confirmation form to delete the hafalan
             $hafalan = $this->model->getHafalanById($id);
+            $peserta = $this->peserta->getPesertaById($hafalan['idpeserta']);
+            $masterStatus = $this->masterStatus->getMasterStatusById($hafalan['stat']);
             require 'views/hafalan/delete.php';
             require_once 'views/template/footer.php'; // Include footer template
         }
