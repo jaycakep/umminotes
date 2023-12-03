@@ -5,6 +5,7 @@ class Index {
     }
 
     function index() {
+        $pageTitle = "Home Page";
         require_once 'views/template/header.php';
         require_once 'views/view_index.php';
     }
