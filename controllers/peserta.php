@@ -7,13 +7,14 @@ class PesertaController
 
     public function __construct()
     {
-        require_once 'views/template/header.php';
         $this->model = new Peserta();
     }
 
     public function index()
     {
+        $pageTitle = "Daftar Peserta";
         $peserta = $this->model->getAllPeserta();
+        require_once 'views/template/header.php';
         require 'views/peserta/index.php';
         require_once 'views/template/footer.php'; // Include footer template
     }
@@ -29,7 +30,9 @@ class PesertaController
 
             header("Location: " . SERVER_HOST . "/peserta"); // Redirect after creating
         } else {
+            $pageTitle = "Tambah Peserta";
             // Display the form to create a new peserta
+            require_once 'views/template/header.php';
             require 'views/peserta/create.php';
             require_once 'views/template/footer.php'; // Include footer template
         }
@@ -47,6 +50,8 @@ class PesertaController
         } else {
             // Display the form to update the peserta
             $peserta = $this->model->getPesertaById($id);
+            $pageTitle = "Edit Peserta";
+            require_once 'views/template/header.php';
             require 'views/peserta/update.php';
             require_once 'views/template/footer.php'; // Include footer template
         }
@@ -59,7 +64,9 @@ class PesertaController
             header("Location: " . SERVER_HOST . "/peserta"); // Redirect after deleting
         } else {
             // Display confirmation form to delete the peserta
+            $pageTitle = "Hapus Peserta";
             $peserta = $this->model->getPesertaById($id);
+            require_once 'views/template/header.php';
             require 'views/peserta/delete.php';
             require_once 'views/template/footer.php'; // Include footer template
         }
