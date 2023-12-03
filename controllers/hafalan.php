@@ -9,7 +9,6 @@ class HafalanController {
     private $masterStatus;
 
     public function __construct() {
-        require_once 'views/template/header.php';
         $this->model = new Hafalan();
         $this->peserta = new Peserta();
         $this->masterStatus = new MasterStatus();
@@ -17,6 +16,8 @@ class HafalanController {
 
     public function index() {
         $hafalanList = $this->model->getAllHafalan();
+        $pageTitle = "Daftar Hafalan";
+        require_once 'views/template/header.php';
         require 'views/hafalan/index.php';
         require_once 'views/template/footer.php'; // Include footer template
     }
@@ -38,6 +39,8 @@ class HafalanController {
             // Display the form to create a new hafalan
             $daftarPeserta = $this->peserta->getAllPeserta();
             $daftarStatus = $this->masterStatus->getAllMasterStatus();
+            $pageTitle = "Input Hafalan";
+            require_once 'views/template/header.php';
             require 'views/hafalan/create.php';
             require_once 'views/template/footer.php'; // Include footer template
         }
@@ -62,6 +65,8 @@ class HafalanController {
             $statusSelected = $this->masterStatus->getMasterStatusById($hafalan['stat']);
             $daftarPeserta = $this->peserta->getAllPeserta();
             $daftarStatus = $this->masterStatus->getAllMasterStatus();
+            $pageTitle = "Edit Hafalan";
+            require_once 'views/template/header.php';
             require 'views/hafalan/update.php';
             require_once 'views/template/footer.php'; // Include footer template
         }
@@ -76,6 +81,8 @@ class HafalanController {
             $hafalan = $this->model->getHafalanById($id);
             $peserta = $this->peserta->getPesertaById($hafalan['idpeserta']);
             $masterStatus = $this->masterStatus->getMasterStatusById($hafalan['stat']);
+            $pageTitle = "Hapus Hafalan";
+            require_once 'views/template/header.php';
             require 'views/hafalan/delete.php';
             require_once 'views/template/footer.php'; // Include footer template
         }
