@@ -7,7 +7,6 @@
     <title><?php echo($pageTitle);?></title>
     <link rel="stylesheet" href="<?php echo (SERVER_HOST); ?>/assets/css/bootstrap.min.css">
 </head>
-
 <body>
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
