@@ -97,6 +97,11 @@ h1 {
   font-size: calc(1.375rem + 1.5vw);
 }
 
+.h1-1 {
+  font-size: 100pt;
+  font-weight: bolder;
+}
+
 @media (min-width: 1200px) {
 
   .h1,
@@ -609,8 +614,12 @@ progress {
 }
 
 .img-fluid {
-  max-width: 50%;
+  max-width: 100%;
   height: auto;
+}
+
+.img-fluid-l {
+  max-width: 1000%;
 }
 
 .img-thumbnail {
@@ -7839,6 +7848,10 @@ fieldset:disabled .btn {
 
 .mt-5 {
   margin-top: 3rem !important;
+}
+
+.mt-6 {
+  margin-top: 10rem !important;
 }
 
 .mt-auto {
